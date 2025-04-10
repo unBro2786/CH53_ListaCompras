@@ -6,8 +6,14 @@ const alertValidacionesTexto = document.getElementById("alertValidacionesTexto")
 const alertValidaciones = document.getElementById("alertValidaciones");
 const tablaListaCompras = document.getElementById("tablaListaCompras");
 const cuerpoTabla = tablaListaCompras.getElementsByTagName("tbody").item(0);
+const contadorProductos = document.getElementById("contadorProductos");
+const totalProductos = document.getElementById("totalProductos");
+const productosTotal = document.getElementById("productosTotal");
+const precioTotal = document.getElementById("precioTotal");
 
 let cont = 0;
+let costoTotal = 0;
+let totalEnProductos = 0;
 
 function validarCantidad() {
     if (txtNumber.value.trim().length <= 0) return false;
@@ -17,6 +23,7 @@ function validarCantidad() {
     return true;
 } /* validarCantidad */
 
+/* Retorna un numero aleatorio entre 0.00 y 100.00 */
 function getPrecio() {
     return Math.round((Math.random() * 10000)) / 100;
 }
@@ -60,6 +67,15 @@ btnAgregar.addEventListener("click", function (event) {
                         <td>${precio}</td>
                     </tr>`;
         cuerpoTabla.insertAdjacentHTML("beforeend", newRow);
+
+        costoTotal += precio * Number(txtNumber.value);
+
+        precioTotal.innerText = "$ " + costoTotal.toFixed(2);
+        totalEnProductos += Number(txtNumber.value);
+        productosTotal.innerText = totalEnProductos;
+
+
+        contadorProductos.innerText = cont;
 
         txtName.value = "";
         txtNumber.value = "";
