@@ -11,6 +11,8 @@ const totalProductos = document.getElementById("totalProductos");
 const productosTotal = document.getElementById("productosTotal");
 const precioTotal = document.getElementById("precioTotal");
 
+let datos = [];
+
 let cont = 0;
 let costoTotal = 0;
 let totalEnProductos = 0;
@@ -66,14 +68,28 @@ btnAgregar.addEventListener("click", function (event) {
                         <td>${txtNumber.value}</td>
                         <td>${precio}</td>
                     </tr>`;
+
+        let elemento = {
+            "cont" : cont,
+            "nombre" : txtName.value,
+            "cantidad" : txtNumber.value,
+            "precio" : precio
+        };
+        datos.push(elemento);
+        localStorage.setItem("datos", JSON.stringify(datos));
+
         cuerpoTabla.insertAdjacentHTML("beforeend", newRow);
-
         costoTotal += precio * Number(txtNumber.value);
-
         precioTotal.innerText = "$ " + costoTotal.toFixed(2);
         totalEnProductos += Number(txtNumber.value);
         productosTotal.innerText = totalEnProductos;
-
+        
+        let resumen = {
+            "cont" : cont,
+            "totalEnProductos" : totalEnProductos,
+            "costoTotal" : costoTotal
+        }
+        localStorage.setItem("resumen", JSON.stringify(resumen));
 
         contadorProductos.innerText = cont;
 
