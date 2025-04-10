@@ -99,6 +99,23 @@ btnAgregar.addEventListener("click", function (event) {
     }
 });
 
+btnClear.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    localStorage.removeItem("datos");
+    localStorage.removeItem("resumen");
+
+    cuerpoTabla.innerHTML = "";
+
+    contadorProductos.innerText = "0";
+    productosTotal.innerText = "0";
+    precioTotal.innerText = "0";
+
+    alertValidaciones.style.display = "none";
+    txtName.style.border = "";
+    txtNumber.style.border = "";
+});
+
 /*  */
 window.addEventListener("load", function(event){
     event.preventDefault();
