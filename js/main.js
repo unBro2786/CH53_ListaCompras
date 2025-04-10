@@ -98,3 +98,35 @@ btnAgregar.addEventListener("click", function (event) {
         txtName.focus();
     }
 });
+
+/*  */
+window.addEventListener("load", function(event){
+    event.preventDefault();
+    
+    if (this.localStorage.getItem("datos") != null){
+        datos = JSON.parse(this.localStorage.getItem("datos"));
+    }
+
+    datos.forEach((d) => {
+        let newRow = 
+        `<tr>
+            <td>${d.cont}</d>
+            <td>${d.nombre}</d>
+            <td>${d.cantidad}</d>
+            <td>${d.precio}</d>
+        </tr>`;
+
+        cuerpoTabla.insertAdjacentHTML("beforebegin", newRow);
+    });
+
+    if (this.localStorage.getItem("resumen") != null) {
+        let resumen = JSON.parse(this.localStorage.getItem("resumen"));
+        costoTotal = resumen.totalEnProductos;
+        totalEnProductos = resumen.totalEnProductos;
+        cont = resumen.cont;
+    }
+
+    precioTotal.innerText = "$ " + costoTotal.toFixed(2);
+    productosTotal.innerText = totalEnProductos;
+    contadorProductos.innerText = cont;
+});
